@@ -1,0 +1,2 @@
+# SupportFireCalculator
+艦これの支援砲撃の必要火力を計算する何か
