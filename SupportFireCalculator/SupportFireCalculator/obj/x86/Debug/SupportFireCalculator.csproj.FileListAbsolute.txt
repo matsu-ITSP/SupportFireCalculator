@@ -6,3 +6,5 @@ C:\Users\拓也\documents\visual studio 2010\Projects\SupportFireCalculator\Supp
 C:\Users\拓也\documents\visual studio 2010\Projects\SupportFireCalculator\SupportFireCalculator\obj\x86\Debug\SupportFireCalculator.csproj.GenerateResource.Cache
 C:\Users\拓也\documents\visual studio 2010\Projects\SupportFireCalculator\SupportFireCalculator\obj\x86\Debug\SupportFireCalculator.exe
 C:\Users\拓也\documents\visual studio 2010\Projects\SupportFireCalculator\SupportFireCalculator\obj\x86\Debug\SupportFireCalculator.pdb
+C:\Users\拓也\Documents\Visual Studio 2010\Projects\SupportFireCalculator\SupportFireCalculator\SupportFireCalculator\obj\x86\Debug\SupportFireCalculator.exe
+C:\Users\拓也\Documents\Visual Studio 2010\Projects\SupportFireCalculator\SupportFireCalculator\SupportFireCalculator\obj\x86\Debug\SupportFireCalculator.pdb

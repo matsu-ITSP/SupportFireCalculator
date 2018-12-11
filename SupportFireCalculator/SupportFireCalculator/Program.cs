@@ -17,7 +17,7 @@ namespace SupportFireCalculator {
 		 * 追加ボタンで縦列追加、10くらいまで
 		 * ホームの要素:(クリティカルチェック、中破チェック、検索テキストボックス)追加ボタン、実行ボタン
 		 * テキストボックスでヒットしないのが入力されたらその列は"-"で表示
-		 * 実行画面:4*5or4*4表示
+		 * 実行画面:4*5or4*4表示 poi~~~
 		 * */
 		static void Main() {
 			Application.EnableVisualStyles();
