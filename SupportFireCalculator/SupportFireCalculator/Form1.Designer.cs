@@ -95,6 +95,7 @@
 			this.buttonCalc.TabIndex = 2;
 			this.buttonCalc.Text = "計算";
 			this.buttonCalc.UseVisualStyleBackColor = true;
+			this.buttonCalc.Click += new System.EventHandler(this.buttonCalc_Click);
 			// 
 			// checkBoxIsRengou
 			// 

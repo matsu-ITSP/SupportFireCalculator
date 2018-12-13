@@ -9,10 +9,12 @@ using System.Windows.Forms;
 
 namespace SupportFireCalculator {
 	public partial class Form1 : Form {
+
 		private CheckBox[] criticals;
 		private CheckBox[] harfBrokens;
 		private TextBox[] enemys;
 		private const int COLUMNMAX = 10;
+
 		public Form1() {
 			InitializeComponent();
 			criticals = new CheckBox[COLUMNMAX];
@@ -24,6 +26,12 @@ namespace SupportFireCalculator {
 		private void buttonAdd_Click(object sender, EventArgs e) {
 			addPanelColumn();
 		}
+
+		private void buttonCalc_Click(object sender, EventArgs e) {
+			Result form = new Result();
+			form.Show();
+		}
+
 		private void addPanelColumn(){
 			if(tableLayoutPanel1.ColumnCount+1 > COLUMNMAX){
 				return;
@@ -52,7 +60,6 @@ namespace SupportFireCalculator {
 			// tableLayoutPanel自体にも高さを加える
 			tableLayoutPanel1.Width += 100;
 		}
-
 
 	}
 }
