@@ -11,14 +11,14 @@ namespace SupportFireCalculator {
 	public partial class Form1 : Form {
 
 		private CheckBox[] criticals;
-		private CheckBox[] harfBrokens;
+		private CheckBox[] halfBrokens;
 		private TextBox[] enemys;
 		private const int COLUMNMAX = 10;
 
 		public Form1() {
 			InitializeComponent();
 			criticals = new CheckBox[COLUMNMAX];
-			harfBrokens = new CheckBox[COLUMNMAX];
+			halfBrokens = new CheckBox[COLUMNMAX];
 			enemys = new TextBox[COLUMNMAX];
 			addPanelColumn();
 		}
@@ -28,6 +28,11 @@ namespace SupportFireCalculator {
 		}
 
 		private void buttonCalc_Click(object sender, EventArgs e) {
+			/*
+			 * 送信データは
+			 * ・連合か否か
+			 * ・入力された敵と詳細情報をオブジェクトにしたものの配列
+			 * */
 			Result form = new Result();
 			form.Show();
 		}
@@ -51,8 +56,8 @@ namespace SupportFireCalculator {
 			int ccnt = tableLayoutPanel1.ColumnCount;
 			criticals[ccnt-1] = new CheckBox();
 			tableLayoutPanel1.Controls.Add(criticals[ccnt-1],ccnt-2,0);
-			harfBrokens[ccnt-1] = new CheckBox();
-			tableLayoutPanel1.Controls.Add(harfBrokens[ccnt-1],ccnt-2,1);
+			halfBrokens[ccnt-1] = new CheckBox();
+			tableLayoutPanel1.Controls.Add(halfBrokens[ccnt-1],ccnt-2,1);
 			enemys[ccnt-1] = new TextBox();
 			tableLayoutPanel1.Controls.Add(enemys[ccnt-1],ccnt-2,2);
 
