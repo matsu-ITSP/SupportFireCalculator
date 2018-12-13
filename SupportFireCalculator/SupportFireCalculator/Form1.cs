@@ -33,7 +33,7 @@ namespace SupportFireCalculator {
 			 * ・連合か否か
 			 * ・入力された敵と詳細情報をオブジェクトにしたものの配列
 			 * */
-			Result form = new Result();
+			Result form = new Result(false,null);
 			form.Show();
 		}
 

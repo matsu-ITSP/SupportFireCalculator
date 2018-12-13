@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 
 namespace SupportFireCalculator {
-	class EnemyAndAtkInfo {
+	public class EnemyAndAtkInfo {
 
 		String name;
 		int arm;
