@@ -50,9 +50,8 @@ namespace SupportFireCalculator {
 
 			tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 50F));
 			// tableLayoutPanel自体にも高さを加える
-			tableLayoutPanel1.Width += 50;
+			tableLayoutPanel1.Width += 100;
 		}
-
 
 
 	}
