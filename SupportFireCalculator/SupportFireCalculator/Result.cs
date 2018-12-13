@@ -21,15 +21,6 @@ namespace SupportFireCalculator {
 		Label[] formation;
 		Boolean isRengo;
 
-		/*
-		 * 受け取る数値は
-		 * ・連合or通常
-		 * ・敵のデータ
-		 * ・その敵にクリティカルorNot、中破orNot
-		 * Bool isRengo
-		 * 敵データのリスト:敵データはクラスで用意すべき
-		 * 
-		 * */
 		public Result(Boolean isRengo , List<EnemyAndAtkInfo> ls) {
 
 			InitializeComponent();

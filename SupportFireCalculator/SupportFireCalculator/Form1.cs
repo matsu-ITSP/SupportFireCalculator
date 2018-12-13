@@ -12,17 +12,60 @@ namespace SupportFireCalculator {
 
 		private CheckBox[] criticals;
 		private CheckBox[] halfBrokens;
-		private TextBox[] enemys;
+		private TextBox[] enemyForm;
+		private List<Enemy> enemys;
 		private const int COLUMNMAX = 10;
+		private const int ENEMYSMAX = 10000;
+
+		/*
+		 * CSVをパースしてEnemyクラスの配列に格納
+		 * searchNameを配列に
+		 * textboxのautoCompに入れる
+		 * 入力されたものをEnemyクラスの配列で検索
+		 * ヒットしたものをEnemyAndAtkInfoに入れる
+		 * 送る
+		 * */
 
 		public Form1() {
 			InitializeComponent();
 			criticals = new CheckBox[COLUMNMAX];
 			halfBrokens = new CheckBox[COLUMNMAX];
-			enemys = new TextBox[COLUMNMAX];
+			enemyForm = new TextBox[COLUMNMAX];
+			enemys = new List<Enemy>();
 			addPanelColumn();
+			parser();
 		}
+		private void parser(){
+			char[] cut = {','};
+			List<String> lineEnemy = readFileList("csv_data.csv");
+			String name;
+			int hp;
+			int arm;
+			for(int i = 0 ; i < lineEnemy.Count ; i++){
+				String[] temp = lineEnemy[i].Split(cut);
+				//要素数3じゃなきゃバグったデータ
+				//3でも２つ目、３つ目が数字じゃなきゃバグ
+				if(temp.Count() == 3 && Int32.TryParse(temp[1],out hp) 
+									 && Int32.TryParse(temp[2],out arm)){
+					name = temp[0];
+					enemys.Add(new Enemy(name,hp,arm));
+				}
+			}
+			return;
+		}
+		private List<string> readFileList(string path)
+        {
+            List<string> ret = new List<string>(); ;
 
+            string str = null;
+            using (System.IO.StreamReader sr = new System.IO.StreamReader(
+                path, System.Text.Encoding.GetEncoding("Shift-jis"))){
+                while ((str = sr.ReadLine()) != null){
+                    ret.Add(str);
+                }
+            }
+            return ret;
+        }
 		private void buttonAdd_Click(object sender, EventArgs e) {
 			addPanelColumn();
 		}
@@ -58,8 +101,8 @@ namespace SupportFireCalculator {
 			tableLayoutPanel1.Controls.Add(criticals[ccnt-1],ccnt-2,0);
 			halfBrokens[ccnt-1] = new CheckBox();
 			tableLayoutPanel1.Controls.Add(halfBrokens[ccnt-1],ccnt-2,1);
-			enemys[ccnt-1] = new TextBox();
-			tableLayoutPanel1.Controls.Add(enemys[ccnt-1],ccnt-2,2);
+			enemyForm[ccnt-1] = new TextBox();
+			tableLayoutPanel1.Controls.Add(enemyForm[ccnt-1],ccnt-2,2);
 
 			tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 50F));
 			// tableLayoutPanel自体にも高さを加える
