@@ -117,8 +117,9 @@ namespace SupportFireCalculator {
 			enemyForm[ccnt-1].AutoCompleteSource = AutoCompleteSource.CustomSource;
 			enemyForm[ccnt-1].AutoCompleteCustomSource = source;
 
-			tableLayoutPanel1.Width += 200;
-			tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 100F));
+			tableLayoutPanel1.Width += 400;
+			tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 250F));
+			enemyForm[ccnt-1].Width = 250;
 			// tableLayoutPanel自体にも高さを加える
 			
 		}

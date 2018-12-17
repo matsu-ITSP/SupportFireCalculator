@@ -37,7 +37,7 @@
 			// 
 			this.tableLayoutPanel1.ColumnCount = 2;
 			this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 150F));
-			this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 250F));
+			this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 550F));
 			this.tableLayoutPanel1.Controls.Add(this.label1, 0, 0);
 			this.tableLayoutPanel1.Controls.Add(this.label2, 0, 1);
 			this.tableLayoutPanel1.Controls.Add(this.label3, 0, 2);
@@ -47,7 +47,7 @@
 			this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 33.33333F));
 			this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 33.33333F));
 			this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 33.33333F));
-			this.tableLayoutPanel1.Size = new System.Drawing.Size(400, 150);
+			this.tableLayoutPanel1.Size = new System.Drawing.Size(700, 150);
 			this.tableLayoutPanel1.TabIndex = 0;
 			// 
 			// label1
@@ -62,7 +62,7 @@
 			// label2
 			// 
 			this.label2.AutoSize = true;
-			this.label2.Location = new System.Drawing.Point(3, 50);
+			this.label2.Location = new System.Drawing.Point(3, 49);
 			this.label2.Name = "label2";
 			this.label2.Size = new System.Drawing.Size(101, 24);
 			this.label2.TabIndex = 1;
@@ -71,7 +71,7 @@
 			// label3
 			// 
 			this.label3.AutoSize = true;
-			this.label3.Location = new System.Drawing.Point(3, 100);
+			this.label3.Location = new System.Drawing.Point(3, 98);
 			this.label3.Name = "label3";
 			this.label3.Size = new System.Drawing.Size(58, 24);
 			this.label3.TabIndex = 2;
@@ -111,7 +111,7 @@
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(13F, 24F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-			this.ClientSize = new System.Drawing.Size(593, 332);
+			this.ClientSize = new System.Drawing.Size(1264, 530);
 			this.Controls.Add(this.checkBoxIsRengou);
 			this.Controls.Add(this.buttonCalc);
 			this.Controls.Add(this.buttonAdd);
