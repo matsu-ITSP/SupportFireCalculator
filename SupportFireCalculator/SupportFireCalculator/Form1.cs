@@ -16,6 +16,7 @@ namespace SupportFireCalculator {
 		private List<Enemy> enemys;
 		private const int COLUMNMAX = 10;
 		private const int ENEMYSMAX = 10000;
+		private AutoCompleteStringCollection source;
 
 		/*
 		 * CSVをパースしてEnemyクラスの配列に格納
@@ -32,8 +33,10 @@ namespace SupportFireCalculator {
 			halfBrokens = new CheckBox[COLUMNMAX];
 			enemyForm = new TextBox[COLUMNMAX];
 			enemys = new List<Enemy>();
-			addPanelColumn();
+			source = new AutoCompleteStringCollection();
 			parser();
+			addPanelColumn();
+			
 		}
 		private void parser(){
 			char[] cut = {','};
@@ -50,8 +53,14 @@ namespace SupportFireCalculator {
 					name = temp[0];
 					enemys.Add(new Enemy(name,hp,arm));
 				}
+				//敵多すぎたら中断
+				if(i > ENEMYSMAX){
+					break;
+				}
 			}
-			return;
+			for(int i = 0 ; i < enemys.Count ; i++){
+				source.Add(enemys[i].getsearchName());
+			}
 		}
 		private List<string> readFileList(string path)
         {
@@ -103,10 +112,15 @@ namespace SupportFireCalculator {
 			tableLayoutPanel1.Controls.Add(halfBrokens[ccnt-1],ccnt-2,1);
 			enemyForm[ccnt-1] = new TextBox();
 			tableLayoutPanel1.Controls.Add(enemyForm[ccnt-1],ccnt-2,2);
+			//オートコンプリート設定
+			enemyForm[ccnt-1].AutoCompleteMode = AutoCompleteMode.Suggest;
+			enemyForm[ccnt-1].AutoCompleteSource = AutoCompleteSource.CustomSource;
+			enemyForm[ccnt-1].AutoCompleteCustomSource = source;
 
-			tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 50F));
+			tableLayoutPanel1.Width += 200;
+			tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 100F));
 			// tableLayoutPanel自体にも高さを加える
-			tableLayoutPanel1.Width += 100;
+			
 		}
 
 	}
