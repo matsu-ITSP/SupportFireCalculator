@@ -38,6 +38,7 @@ namespace SupportFireCalculator {
 			addPanelColumn();
 			
 		}
+		//CSVパースしてEnemyオブジェクト作ってenemysに入れる
 		private void parser(){
 			char[] cut = {','};
 			List<String> lineEnemy = readFileList("csv_data.csv");
@@ -62,6 +63,7 @@ namespace SupportFireCalculator {
 				source.Add(enemys[i].getsearchName());
 			}
 		}
+		//pathファイルを行ごとに読んだものを返す
 		private List<string> readFileList(string path)
         {
             List<string> ret = new List<string>(); ;
@@ -75,35 +77,47 @@ namespace SupportFireCalculator {
             }
             return ret;
         }
+		//列追加ボタンを押したときの処理
 		private void buttonAdd_Click(object sender, EventArgs e) {
 			addPanelColumn();
 		}
-
+		//計算ボタンを押したときの処理
 		private void buttonCalc_Click(object sender, EventArgs e) {
 			/*
 			 * 送信データは
 			 * ・連合か否か
-			 * ・入力された敵と詳細情報をオブジェクトにしたものの配列
+			 * ・入力された敵と詳細情報をオブジェクトにしたもののリスト
 			 * */
-			Result form = new Result(false,null);
+
+			Result form = new Result(checkBoxIsRengou.Checked,null);
 			form.Show();
 		}
-
+		//何番目の入力かを入れると、EnemyAndAtkInfoオブジェクトが返る、ヒットしなければnull
+		private EnemyAndAtkInfo getEnemyDetail(int enemyNum){
+			String enemyName = enemyForm[enemyNum].Text;
+			Boolean isCritical = criticals[enemyNum].Checked;
+			Boolean isHalfBroken = halfBrokens[enemyNum].Checked;
+			EnemyAndAtkInfo ans = null;
+			if(searchEnemy(enemyName) != null){
+				Enemy e = searchEnemy(enemyName);
+				ans = new EnemyAndAtkInfo(e.getName(),e.getArm(),e.getHp(),isCritical,isHalfBroken);
+			}
+			return ans;
+		}
+		//敵の名前を入れるとEnemyオブジェクトが返る、ヒットしなければnull
+		private Enemy searchEnemy(String enemyName){
+			for(int i = 0 ; i < enemys.Count ; i++){
+				if(enemyName.Equals(enemys[i].getName())){
+					return enemys[i];
+				}
+			}
+			return null;
+		}
+		//tableLayoutPanelに一列加える
 		private void addPanelColumn(){
 			if(tableLayoutPanel1.ColumnCount+1 > COLUMNMAX){
 				return;
 			}
-			/*
-			foreach (Control c in tableLayoutPanel1.Controls){
-				TableLayoutPanelCellPosition pos =
-				tableLayoutPanel1.GetPositionFromControl(c);
-				tableLayoutPanel1.SetCellPosition(c, pos);
-				if (tableLayoutPanel1.ColumnCount <= pos.Column)
-					tableLayoutPanel1.ColumnCount = pos.Column + 1;
-				if (tableLayoutPanel1.ColumnCount <= pos.Column)
-					tableLayoutPanel1.ColumnCount = pos.Column + 1;
-			}*/
-			
 			tableLayoutPanel1.ColumnCount++;
 			int ccnt = tableLayoutPanel1.ColumnCount;
 			criticals[ccnt-1] = new CheckBox();
