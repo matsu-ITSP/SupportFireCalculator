@@ -27,11 +27,33 @@ namespace SupportFireCalculator {
 			this.isRengo = isRengo;
 			makeTable();
 			initialLabel();
-			setLabel(calcAtk(ls));
+			//setLabel(calcAtk(ls[0]));
+			setLabel(makeAtkText(ls));
 			setLabelToTable();
 		}
+		private String[,] makeAtkText(List<EnemyAndAtkInfo> ls){
+			String[,] ans = new String[COURSENUM,formationNum()];
+			List<int[,]> atk = new List<int[,]>();
+
+			for(int i = 0 ; i < ls.Count ; i++){
+				atk.Add(calcAtk(ls[i]));
+			}
+			for(int i = 0 ; i < COURSENUM ; i++){
+				for(int j = 0 ; j < formationNum() ; j++){
+					ans[i,j] = null;
+					for(int k = 0 ; k < ls.Count ; k++){
+						ans[i,j] = ans[i,j] + atk[k][i,j].ToString() + "/";
+					}
+					ans[i,j] = ans[i,j].Remove(ans[i,j].Length-1);
+					if(ans == null){
+						ans[i,j] = "0";
+					}
+				}
+			}
+			return ans;
+		}
 		//体力・装甲から必要火力を計算する
-		private int[,] calcAtk(List<EnemyAndAtkInfo> ls){
+		private int[,] calcAtk(EnemyAndAtkInfo enemy){
 			int[,] ans = new int[COURSENUM,formationNum()];
 			Course c = new Course();
 			RengoFormation rf = new RengoFormation();
@@ -40,10 +62,12 @@ namespace SupportFireCalculator {
 			for(int i = 0 ; i < COURSENUM ; i++){
 				for(int j = 0 ; j < formationNum() ; j++){
 					//todo
-					if(isRengo){
-						ans[i,j] = ls[0].getNeedAtk(c.getPow(i),rf.getPow(j));
+					if(enemy == null){
+						ans[i,j] = 0;
+					}else if(isRengo){
+						ans[i,j] = enemy.getNeedAtk(c.getPow(i),rf.getPow(j));
 					}else{
-						ans[i,j] = ls[0].getNeedAtk(c.getPow(i),f.getPow(j));
+						ans[i,j] = enemy.getNeedAtk(c.getPow(i),f.getPow(j));
 					}
 				}
 			}
@@ -65,7 +89,7 @@ namespace SupportFireCalculator {
 			}
 		}
 		//ラベルのテキストを入れる
-		private void setLabel(int[,] atk){
+		private void setLabel(String[,] atk){
 
 			Course c = new Course();
 			for(int i = 0 ; i < COURSENUM ; i++){
@@ -85,7 +109,7 @@ namespace SupportFireCalculator {
 			}
 			for(int i = 0 ; i < COURSENUM ; i++){
 				for(int j = 0 ; j < formationNum() ; j++){
-					atkLabel[i,j].Text = atk[i,j].ToString();
+					atkLabel[i,j].Text = atk[i,j];
 				}
 			}
 		}
@@ -114,9 +138,9 @@ namespace SupportFireCalculator {
 		//tableLayoutに1Column加える
 		private void tableAddOneColumn(){
 			tableLayoutPanel1.ColumnCount++;
-			tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 50F));
+			tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 100F));
 			// tableLayoutPanel自体にも高さを加える
-			tableLayoutPanel1.Width += 100;
+			tableLayoutPanel1.Width += 200;
 		}
 		//連合なら4,そうでないなら6を返す
 		private int formationNum(){
