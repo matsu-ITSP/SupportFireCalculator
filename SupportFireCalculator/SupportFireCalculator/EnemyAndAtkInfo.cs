@@ -32,15 +32,10 @@ namespace SupportFireCalculator {
 		 * 三式弾x1以上		1.3倍	2個以上装備しても1.3倍
 		 * 
 		 * プログラミングっぽく
-		 * dmg = [[fire - (arm*1.3-0.6)] * (isCritical ? 1.5 : 1.0)] * (pt)
+		 * dmg = [[fire* (isCritical ? 1.5 : 1.0)] - (arm*1.3-0.6)] * (pt)
 		 * pt = めんどくさい式
 		 * defFire = (atk + 4) * form * course
 		 * fire = if (defFire < cap) defFire (cap + sqrt(defFire - cap))
-		 * 
-		 * fire = cap + sqrt(defFire - cap)
-		 * defFire = (fire - cap)^2 + cap
-		 * atk = defFire / form / course - 4
-		 *     = ((fire - cap)^2 + cap) / form / course - 4
 		 * 
 		 * 上の逆算っぽく,ptは無視
 		 * 切り上げ:{}でかく
@@ -48,7 +43,7 @@ namespace SupportFireCalculator {
 		 * cap = 150
 		 * crt = isCritical ? 1.5 : 1.0
 		 * armMax = arm*1.3-0.6
-		 * fire = {{hp / crt} + armMax} //fireは一意
+		 * fire = {{hp + armMax} / crt} //fireは一意
 		 * atk = if (fire < cap) ((fire / form / course) - 4)
 		 *		    (((fire - cap)^2 + cap) / form / course - 4)
 		 * 
@@ -69,7 +64,7 @@ namespace SupportFireCalculator {
 			//isHalfBrokenに従ってHP調整
 			double crt = isCritical ? 1.5 : 1.0;
 			double armMax = arm * 1.3 - 0.6;
-			int fire = (int)Math.Ceiling(Math.Ceiling((double)hp / crt)+ armMax);
+			int fire = (int)Math.Ceiling(Math.Ceiling((double)hp + (double)armMax) / crt);
 			if(fire <= CAP){
 				atk = (int)Math.Ceiling((double)fire / coursePow / formationPow) - 4;
 			}else{
