@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Text.RegularExpressions;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -7,12 +8,13 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 
+
 namespace SupportFireCalculator {
 	public partial class Form1 : Form {
 
-		private CheckBox[] criticals;
-		private CheckBox[] halfBrokens;
-		private TextBox[] enemyForm;
+		private List<CheckBox> criticals;
+		private List<CheckBox> halfBrokens;
+		private List<TextBox> enemyForm;
 		private List<Enemy> enemys;
 		private const int COLUMNMAX = 10;
 		private const int ENEMYSMAX = 10000;
@@ -29,15 +31,16 @@ namespace SupportFireCalculator {
 
 		public Form1() {
 			InitializeComponent();
-			criticals = new CheckBox[COLUMNMAX];
-			halfBrokens = new CheckBox[COLUMNMAX];
-			enemyForm = new TextBox[COLUMNMAX];
+			criticals = new List<CheckBox>();
+			halfBrokens = new List<CheckBox>();
+			enemyForm = new List<TextBox>();
 			enemys = new List<Enemy>();
 			source = new AutoCompleteStringCollection();
 			parser();
 			addPanelColumn();
 			
 		}
+		//CSVパースしてEnemyオブジェクト作ってenemysに入れる
 		private void parser(){
 			char[] cut = {','};
 			List<String> lineEnemy = readFileList("csv_data.csv");
@@ -62,6 +65,7 @@ namespace SupportFireCalculator {
 				source.Add(enemys[i].getsearchName());
 			}
 		}
+		//pathファイルを行ごとに読んだものを返す
 		private List<string> readFileList(string path)
         {
             List<string> ret = new List<string>(); ;
@@ -75,51 +79,70 @@ namespace SupportFireCalculator {
             }
             return ret;
         }
+		//列追加ボタンを押したときの処理
 		private void buttonAdd_Click(object sender, EventArgs e) {
 			addPanelColumn();
 		}
-
+		//計算ボタンを押したときの処理
 		private void buttonCalc_Click(object sender, EventArgs e) {
 			/*
 			 * 送信データは
 			 * ・連合か否か
-			 * ・入力された敵と詳細情報をオブジェクトにしたものの配列
+			 * ・入力された敵と詳細情報をオブジェクトにしたもののリスト
 			 * */
-			Result form = new Result(false,null);
+			List<EnemyAndAtkInfo> ls = new List<EnemyAndAtkInfo>();
+			for(int i = 0 ; i < enemyForm.Count ; i++){
+				ls.Add(getEnemyDetail(i));
+			}
+			Result form = new Result(checkBoxIsRengou.Checked,ls);
 			form.Show();
 		}
-
+		//何番目の入力かを入れると、EnemyAndAtkInfoオブジェクトが返る、ヒットしなければnull
+		//入力された名前は()で追加情報があるのでそれは除く
+		private EnemyAndAtkInfo getEnemyDetail(int enemyNum){
+			String enemyName = enemyForm[enemyNum].Text;
+			Regex reg = new Regex("<[^>]*>");
+			enemyName = reg.Replace(enemyName,"");
+			Boolean isCritical = criticals[enemyNum].Checked;
+			Boolean isHalfBroken = halfBrokens[enemyNum].Checked;
+			EnemyAndAtkInfo ans = null;
+			if(searchEnemy(enemyName) != null){
+				Enemy e = searchEnemy(enemyName);
+				ans = new EnemyAndAtkInfo(e.getName(),e.getArm(),e.getHp(),isCritical,isHalfBroken);
+			}
+			return ans;
+		}
+		//敵の名前を入れるとEnemyオブジェクトが返る、ヒットしなければnull
+		private Enemy searchEnemy(String enemyName){
+			for(int i = 0 ; i < enemys.Count ; i++){
+				if(enemyName.Equals(enemys[i].getName())){
+					return enemys[i];
+				}
+			}
+			return null;
+		}
+		//tableLayoutPanelに一列加える
 		private void addPanelColumn(){
 			if(tableLayoutPanel1.ColumnCount+1 > COLUMNMAX){
 				return;
 			}
-			/*
-			foreach (Control c in tableLayoutPanel1.Controls){
-				TableLayoutPanelCellPosition pos =
-				tableLayoutPanel1.GetPositionFromControl(c);
-				tableLayoutPanel1.SetCellPosition(c, pos);
-				if (tableLayoutPanel1.ColumnCount <= pos.Column)
-					tableLayoutPanel1.ColumnCount = pos.Column + 1;
-				if (tableLayoutPanel1.ColumnCount <= pos.Column)
-					tableLayoutPanel1.ColumnCount = pos.Column + 1;
-			}*/
-			
 			tableLayoutPanel1.ColumnCount++;
 			int ccnt = tableLayoutPanel1.ColumnCount;
-			criticals[ccnt-1] = new CheckBox();
-			tableLayoutPanel1.Controls.Add(criticals[ccnt-1],ccnt-2,0);
-			halfBrokens[ccnt-1] = new CheckBox();
-			tableLayoutPanel1.Controls.Add(halfBrokens[ccnt-1],ccnt-2,1);
-			enemyForm[ccnt-1] = new TextBox();
-			tableLayoutPanel1.Controls.Add(enemyForm[ccnt-1],ccnt-2,2);
+			criticals.Add(new CheckBox());
+			tableLayoutPanel1.Controls.Add(criticals[criticals.Count-1],ccnt-2,0);
+			halfBrokens.Add(new CheckBox());
+			tableLayoutPanel1.Controls.Add(halfBrokens[halfBrokens.Count-1],ccnt-2,1);
+			enemyForm.Add(new TextBox());
+			int pos = enemyForm.Count-1;
+			tableLayoutPanel1.Controls.Add(enemyForm[pos],ccnt-2,2);
 			//オートコンプリート設定
-			enemyForm[ccnt-1].AutoCompleteMode = AutoCompleteMode.Suggest;
-			enemyForm[ccnt-1].AutoCompleteSource = AutoCompleteSource.CustomSource;
-			enemyForm[ccnt-1].AutoCompleteCustomSource = source;
+			enemyForm[pos].AutoCompleteMode = AutoCompleteMode.Suggest;
+			enemyForm[pos].AutoCompleteSource = AutoCompleteSource.CustomSource;
+			enemyForm[pos].AutoCompleteCustomSource = source;
 
 			tableLayoutPanel1.Width += 400;
 			tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 250F));
-			enemyForm[ccnt-1].Width = 250;
+			enemyForm[pos].Width = 250;
 			// tableLayoutPanel自体にも高さを加える
 			
 		}

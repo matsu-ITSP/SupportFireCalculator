@@ -6,20 +6,29 @@ using System.Text;
 namespace SupportFireCalculator {
 	public class Enemy {
 
-		String name;
-		int arm;
-		int hp;
-		String searchName;
+		protected String name;
+		protected int hp;
+		protected int arm;
+		private String searchName;
 
-		public Enemy(String name,int arm,int hp){
+		public Enemy(String name,int hp,int arm){
 			this.name = name;
-			this.arm = arm;
 			this.hp = hp;
-			this.searchName = name + "(耐久:" + hp.ToString() + 
-									 "装甲:" + arm.ToString() + ")";
+			this.arm = arm;
+			this.searchName = name + "<耐久:" + hp.ToString() + 
+									 "装甲:" + arm.ToString() + ">";
 		}
 		public String getsearchName(){
 			return searchName;
+		}
+		public String getName(){
+			return name;
+		}
+		public int getHp(){
+			return hp;
+		}
+		public int getArm(){
+			return arm;
 		}
 	}
 }
