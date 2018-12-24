@@ -6,10 +6,10 @@ using System.Text;
 namespace SupportFireCalculator {
 	public class Enemy {
 
-		String name;
-		int hp;
-		int arm;
-		String searchName;
+		protected String name;
+		protected int hp;
+		protected int arm;
+		private String searchName;
 
 		public Enemy(String name,int hp,int arm){
 			this.name = name;

@@ -64,5 +64,16 @@ namespace SupportFireCalculator {
 			this.isCritical = isCritical;
 			this.isHalfBroken = isHalfBroken;
 		}
+		public int getNeedAtk(){
+			int atk = 0;
+			//isHalfBrokenに従ってHP調整
+			double crt = isCritical ? 1.5 : 1.0;
+			double armMax = arm * 1.3 - 0.6;
+			int fire = (int)Math.Ceiling(Math.Ceiling((double)hp / crt)+ armMax);
+			if(fire <= CAP){
+				//atk = (int)Math.Ceiling((double)fire / form.getPow() / course.getPow()) - 4;
+			}
+			return atk;
+		}
 	}
 }

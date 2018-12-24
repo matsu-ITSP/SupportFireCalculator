@@ -12,9 +12,9 @@ namespace SupportFireCalculator {
 
 		//敵の名前表示したい
 
-		const int COURSENUM = 4;
-		const int FORMATIONNUM = 6;
-		const int RENGOFORMATIONNUM = 4;
+		readonly int COURSENUM = Course.COURSENUM;
+		readonly int FORMATIONNUM = Formation.FORMATIONNUM;
+		readonly int RENGOFORMATIONNUM = RengoFormation.RENGOFORMATIONNUM;
 
 		Label[,] atkLabel;
 		Label[] course;
@@ -59,23 +59,22 @@ namespace SupportFireCalculator {
 		}
 		//ラベルのテキストを入れる
 		private void setLabel(int[,] atk){
-			course[0].Text = "T有利";
-			course[1].Text = "同航戦";
-			course[2].Text = "反航戦";
-			course[3].Text = "T不利";
+
+			Course c = new Course();
+			for(int i = 0 ; i < COURSENUM ; i++){
+				course[i].Text = c.getName(i);
+			}
 
 			if(isRengo){
-				formation[0].Text = "第一(対潜警戒)";
-				formation[1].Text = "第二(前方警戒)";
-				formation[2].Text = "第三(輪形陣)";
-				formation[3].Text = "第四(戦闘隊形)";
+				RengoFormation rf = new RengoFormation();
+				for(int i = 0 ; i < RENGOFORMATIONNUM ; i++){
+					formation[i].Text = rf.getName(i);
+				}
 			}else{
-				formation[0].Text = "単縦陣";
-				formation[1].Text = "複縦陣";
-				formation[2].Text = "輪形陣";
-				formation[3].Text = "梯形陣";
-				formation[4].Text = "単横陣";
-				formation[5].Text = "警戒陣";
+				Formation f = new Formation();
+				for(int i = 0 ; i < FORMATIONNUM ; i++){
+					formation[i].Text = f.getName(i);
+				}
 			}
 			for(int i = 0 ; i < COURSENUM ; i++){
 				for(int j = 0 ; j < formationNum() ; j++){
