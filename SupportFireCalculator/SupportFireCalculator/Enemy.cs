@@ -15,8 +15,8 @@ namespace SupportFireCalculator {
 			this.name = name;
 			this.hp = hp;
 			this.arm = arm;
-			this.searchName = name + "(耐久:" + hp.ToString() + 
-									 "装甲:" + arm.ToString() + ")";
+			this.searchName = name + "<耐久:" + hp.ToString() + 
+									 "装甲:" + arm.ToString() + ">";
 		}
 		public String getsearchName(){
 			return searchName;

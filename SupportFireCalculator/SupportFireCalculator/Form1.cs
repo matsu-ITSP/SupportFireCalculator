@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Text.RegularExpressions;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -6,6 +7,7 @@ using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Windows.Forms;
+
 
 namespace SupportFireCalculator {
 	public partial class Form1 : Form {
@@ -89,14 +91,18 @@ namespace SupportFireCalculator {
 			 * ・入力された敵と詳細情報をオブジェクトにしたもののリスト
 			 * */
 			List<EnemyAndAtkInfo> ls = new List<EnemyAndAtkInfo>();
-			//for(int i = 0 ; i < ){
-			//}
-			Result form = new Result(checkBoxIsRengou.Checked,null);
+			for(int i = 0 ; i < enemyForm.Count ; i++){
+				ls.Add(getEnemyDetail(i));
+			}
+			Result form = new Result(checkBoxIsRengou.Checked,ls);
 			form.Show();
 		}
 		//何番目の入力かを入れると、EnemyAndAtkInfoオブジェクトが返る、ヒットしなければnull
+		//入力された名前は()で追加情報があるのでそれは除く
 		private EnemyAndAtkInfo getEnemyDetail(int enemyNum){
 			String enemyName = enemyForm[enemyNum].Text;
+			Regex reg = new Regex("<[^>]*>");
+			enemyName = reg.Replace(enemyName,"");
 			Boolean isCritical = criticals[enemyNum].Checked;
 			Boolean isHalfBroken = halfBrokens[enemyNum].Checked;
 			EnemyAndAtkInfo ans = null;
