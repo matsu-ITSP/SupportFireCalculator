@@ -33,11 +33,18 @@ namespace SupportFireCalculator {
 		//体力・装甲から必要火力を計算する
 		private int[,] calcAtk(List<EnemyAndAtkInfo> ls){
 			int[,] ans = new int[COURSENUM,formationNum()];
-
+			Course c = new Course();
+			RengoFormation rf = new RengoFormation();
+			Formation f = new Formation();
+			
 			for(int i = 0 ; i < COURSENUM ; i++){
 				for(int j = 0 ; j < formationNum() ; j++){
 					//todo
-					ans[i,j] = 0;
+					if(isRengo){
+						ans[i,j] = ls[0].getNeedAtk(c.getPow(i),rf.getPow(j));
+					}else{
+						ans[i,j] = ls[0].getNeedAtk(c.getPow(i),f.getPow(j));
+					}
 				}
 			}
 			return ans;
