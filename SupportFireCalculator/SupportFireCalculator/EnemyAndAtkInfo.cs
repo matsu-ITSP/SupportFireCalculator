@@ -62,9 +62,11 @@ namespace SupportFireCalculator {
 		public int getNeedAtk(double coursePow , double formationPow){
 			int atk = 0;
 			//isHalfBrokenに従ってHP調整
+			double broken = isHalfBroken ? 0.5 : 1.0;
 			double crt = isCritical ? 1.5 : 1.0;
 			double armMax = arm * 1.3 - 0.6;
-			int fire = (int)Math.Ceiling(Math.Ceiling((double)hp + (double)armMax) / crt);
+			int fire = (int)Math.Ceiling(Math.Ceiling((double)(Math.Ceiling(((double)hp) * broken)) + 
+													  (double)armMax) / crt);
 			if(fire <= CAP){
 				atk = (int)Math.Ceiling((double)fire / coursePow / formationPow) - 4;
 			}else{
