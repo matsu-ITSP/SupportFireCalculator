@@ -11,8 +11,8 @@ namespace SupportFireCalculator {
 		//public enum CourseName { Tyuri , Douko , Hanko , Tfuri };
 		public static readonly int COURSENUM = 4;
 		public Course(){
-			name = new List<string>{"T有利","同航戦","反航戦","T不利"};
-			pow = new List<double>{1.2 , 1.0 , 0.8 , 0.6};
+			names = new List<string>{"T有利","同航戦","反航戦","T不利"};
+			pows = new List<double>{1.2 , 1.0 , 0.8 , 0.6};
 		}
 		/*
 		//コース名を受け取って名前を返す

@@ -10,7 +10,7 @@ using System.Windows.Forms;
 
 
 namespace SupportFireCalculator {
-	public partial class Form1 : Form {
+	public partial class StartForm : Form {
 
 		private List<CheckBox> criticals;
 		private List<CheckBox> halfBrokens;
@@ -29,7 +29,7 @@ namespace SupportFireCalculator {
 		 * 送る
 		 * */
 
-		public Form1() {
+		public StartForm() {
 			InitializeComponent();
 			criticals = new List<CheckBox>();
 			halfBrokens = new List<CheckBox>();

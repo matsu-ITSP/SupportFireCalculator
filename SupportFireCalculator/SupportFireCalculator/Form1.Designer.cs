@@ -1,5 +1,5 @@
 ﻿namespace SupportFireCalculator {
-	partial class Form1 {
+	partial class StartForm {
 		/// <summary>
 		/// 必要なデザイナー変数です。
 		/// </summary>
@@ -62,7 +62,7 @@
 			// label2
 			// 
 			this.label2.AutoSize = true;
-			this.label2.Location = new System.Drawing.Point(3, 49);
+			this.label2.Location = new System.Drawing.Point(3, 50);
 			this.label2.Name = "label2";
 			this.label2.Size = new System.Drawing.Size(101, 24);
 			this.label2.TabIndex = 1;
@@ -71,7 +71,7 @@
 			// label3
 			// 
 			this.label3.AutoSize = true;
-			this.label3.Location = new System.Drawing.Point(3, 98);
+			this.label3.Location = new System.Drawing.Point(3, 100);
 			this.label3.Name = "label3";
 			this.label3.Size = new System.Drawing.Size(58, 24);
 			this.label3.TabIndex = 2;
@@ -107,7 +107,7 @@
 			this.checkBoxIsRengou.Text = "連合";
 			this.checkBoxIsRengou.UseVisualStyleBackColor = true;
 			// 
-			// Form1
+			// StartForm
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(13F, 24F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -116,8 +116,8 @@
 			this.Controls.Add(this.buttonCalc);
 			this.Controls.Add(this.buttonAdd);
 			this.Controls.Add(this.tableLayoutPanel1);
-			this.Name = "Form1";
-			this.Text = "Form1";
+			this.Name = "StartForm";
+			this.Text = "SupportFireCalc";
 			this.tableLayoutPanel1.ResumeLayout(false);
 			this.tableLayoutPanel1.PerformLayout();
 			this.ResumeLayout(false);
