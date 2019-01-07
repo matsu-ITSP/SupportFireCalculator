@@ -98,7 +98,7 @@ namespace SupportFireCalculator {
 			form.Show();
 		}
 		//何番目の入力かを入れると、EnemyAndAtkInfoオブジェクトが返る、ヒットしなければnull
-		//入力された名前は()で追加情報があるのでそれは除く
+		//入力された名前は<>で追加情報があるのでそれは除く
 		private EnemyAndAtkInfo getEnemyDetail(int enemyNum){
 			String enemyName = enemyForm[enemyNum].Text;
 			Regex reg = new Regex("<[^>]*>");
